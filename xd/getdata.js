@@ -58,41 +58,18 @@ export async function Getcredontial() {
   }
   const login = res.data.user[0].login;
   const email = res.data.user[0].email;
-  const fname = res.data.user[0].firstName;
-  const lname = res.data.user[0].lastName;
-  const rawamount = res.data.transaction_aggregate.aggregate.sum.amount;
+  const fname = res.data.user[0].firstName || "doesn't exist";
+  const lname = res.data.user[0].lastName || "doesn't exist";
+  const rawamount = res.data.transaction_aggregate.aggregate.sum.amount || 0;
   let amount = (rawamount / 1000).toFixed(0) + "kB";
-  const campus = res.data.user[0].campus;
-  const region = res.data.user[0].attrs.addressRegion;
+  const campus = res.data.user[0].campus || "doesn't exist";
+  const region = res.data.user[0].attrs.addressRegion || "doesn't exist";
   const profileimage =
     "https://discord.zone01oujda.ma//assets/pictures/" + login + ".jpg";
-  //  checkImageAvailability("thatim", (isAvailable) => {
-  //   if (isAvailable) {
-  //     console.log("Image exists");
-  //   } else {
-  //     console.log("Image not found");
-  //   }
-  // });
 
-  if (campus == null) {
-    localStorage.clear();
-    const root = document.getElementById("root");
-    root.innerHTML = "";
-    showAuthFormLogin();
-    showNotification("the user is not enrolled in the module right now");
-    return;
-  }
+  firstSection(login, fname, lname, profileimage);
 
-  console.log(profileimage);
-
-  firstSection(
-    login,
-    fname,
-    lname,
-    profileimage
-  );
-
-  secondSection(email, amount, campus, region)
+  secondSection(email, amount, campus, region);
 }
 
 //---------------------- AUDIT QUERY
@@ -145,11 +122,11 @@ export async function Getauditdata() {
       fail++;
     }
   });
-  const winrate =
-    ((succes / tottal_filtered_audits.length) * 100).toFixed(1) + "%";
-  const loserate =
-    ((fail / tottal_filtered_audits.length) * 100).toFixed(1) + "%";
-  const total_audits = tottal_filtered_audits.length;
+  let validated = succes / tottal_filtered_audits.length || 0;
+  let failed = fail / tottal_filtered_audits.length || 0;
+  const winrate = (validated * 100).toFixed(1) + "%" || "0%";
+  const loserate = (failed * 100).toFixed(1) + "%" || "0%";
+  const total_audits = tottal_filtered_audits.length || 0;
   renderAuditData(total_audits, succes, fail, winrate, loserate);
   Getskillsdata();
 }

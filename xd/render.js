@@ -1,11 +1,6 @@
 import { showNotification } from "./utils.js";
 
-export function firstSection(
-  login,
-  firstName,
-  lastName,
-  profileImage
-) {
+export function firstSection(login, firstName, lastName, profileImage) {
   const root = document.getElementById("profile-root");
   if (!root) return;
 
@@ -71,9 +66,7 @@ export function renderAuditData(total, success, fail, winrate, loserate) {
   const root = document.getElementById("audit-root");
   if (!root) return;
 
-
   const totalBarWidth = 300;
-
 
   const winPercent = parseFloat(winrate);
   const losePercent = parseFloat(loserate);
@@ -124,7 +117,16 @@ export function renderAuditData(total, success, fail, winrate, loserate) {
 export function renderSkillData(skills) {
   const root = document.getElementById("skill-root");
   if (!root) return;
-
+  if (skills.length === 0) {
+    document.getElementById(
+      "skill-root"
+    ).innerHTML = ` <div class="stats-container">
+      <div class="stats-card">
+      <h2>You Don't Have Any Skills</h2>
+      </div>
+      </div>`;
+    return;
+  }
   // Deduplicate by keeping the highest amount for each type
   const map = new Map();
   for (const skill of skills) {
