@@ -1,8 +1,13 @@
-import { showNotification } from "./utils.js"
+import { showNotification } from "./utils.js";
 
-export function renderUserProfile(login, firstName, lastName, email, xp, campus, region, profileImage) {
-  const root = document.getElementById("profile-root")
-  if (!root) return
+export function renderUserProfile(
+  login,
+  firstName,
+  lastName,
+  profileImage
+) {
+  const root = document.getElementById("profile-root");
+  if (!root) return;
 
   root.innerHTML = `
      <section class="profile-page-container" style="position: relative;">
@@ -29,6 +34,29 @@ export function renderUserProfile(login, firstName, lastName, email, xp, campus,
         <div class="profile-row"><strong>Login:</strong><span>${login}</span></div>
         <div class="profile-row"><strong>First Name:</strong><span>${firstName}</span></div>
         <div class="profile-row"><strong>Last Name:</strong><span>${lastName}</span></div>
+      </div>
+    </article>
+  </section>
+`;
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("jwt");
+    showNotification("logged out");
+    location.reload();
+  });
+}
+
+export function renderUserInfo(email, xp, campus, region) {
+  const root = document.getElementById("profile-informations");
+  if (!root) return;
+
+  root.innerHTML = `
+
+  <section class="profile-page-container" style="position: relative;">
+  <article class="profile-card fade-in">
+   <h1>
+        Personal Info :
+      </h1>
+      <div class="profile-grid">
         <div class="profile-row"><strong>Email:</strong><span>${email}</span></div>
         <div class="profile-row"><strong>Campus:</strong><span>${campus}</span></div>
         <div class="profile-row"><strong>XP:</strong><span class="xp-value">${xp}</span></div>
@@ -36,17 +64,12 @@ export function renderUserProfile(login, firstName, lastName, email, xp, campus,
       </div>
     </article>
   </section>
-`
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem("jwt")
-    showNotification("logged out")
-    location.reload()
-  })
+`;
 }
 
 export function renderAuditData(total, success, fail, winrate, loserate) {
-  const root = document.getElementById("audit-root")
-  if (!root) return
+  const root = document.getElementById("audit-root");
+  if (!root) return;
 
   root.innerHTML = `
     <div class="stats-container">
@@ -82,59 +105,66 @@ export function renderAuditData(total, success, fail, winrate, loserate) {
         </div>
       </div>
     </div>
-  `
+  `;
 }
 
 export function renderSkillData(skills) {
-  const root = document.getElementById("skill-root")
-  if (!root) return
+  const root = document.getElementById("skill-root");
+  if (!root) return;
 
   // Deduplicate by keeping the highest amount for each type
-  const map = new Map()
+  const map = new Map();
   for (const skill of skills) {
     if (!map.has(skill.type) || map.get(skill.type).amount < skill.amount) {
-      map.set(skill.type, skill)
+      map.set(skill.type, skill);
     }
   }
 
-  const cleanedSkills = Array.from(map.values())
-  const maxAmount = Math.max(...cleanedSkills.map((s) => s.amount))
+  const cleanedSkills = Array.from(map.values());
+  const maxAmount = Math.max(...cleanedSkills.map((s) => s.amount));
 
   // Enhanced responsive sizing calculations
-  const isMobile = window.innerWidth < 768
-  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024
+  const isMobile = window.innerWidth < 768;
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
   // Dynamic bar sizing based on screen size and number of skills
-  const baseBarWidth = isMobile ? 40 : isTablet ? 60 : 80
-  const barWidth = Math.max(baseBarWidth, Math.min(120, (window.innerWidth - 100) / cleanedSkills.length - 20))
-  const barSpacing = isMobile ? 15 : isTablet ? 25 : 35
+  const baseBarWidth = isMobile ? 40 : isTablet ? 60 : 80;
+  const barWidth = Math.max(
+    baseBarWidth,
+    Math.min(120, (window.innerWidth - 100) / cleanedSkills.length - 20)
+  );
+  const barSpacing = isMobile ? 15 : isTablet ? 25 : 35;
 
   // Chart dimensions with better mobile optimization
-  const baseChartHeight = isMobile ? 300 : isTablet ? 400 : 500
-  const chartHeight = Math.min(baseChartHeight, window.innerHeight * 0.4)
+  const baseChartHeight = isMobile ? 300 : isTablet ? 400 : 500;
+  const chartHeight = Math.min(baseChartHeight, window.innerHeight * 0.4);
 
   // Calculate total width with padding
-  const totalBarsWidth = cleanedSkills.length * (barWidth + barSpacing) - barSpacing
-  const chartPadding = 40
-  const chartWidth = Math.max(totalBarsWidth + chartPadding * 2, 300)
+  const totalBarsWidth =
+    cleanedSkills.length * (barWidth + barSpacing) - barSpacing;
+  const chartPadding = 40;
+  const chartWidth = Math.max(totalBarsWidth + chartPadding * 2, 300);
 
   // Dynamic font sizes based on bar width and screen size
-  const amountFontSize = Math.max(12, Math.min(18, barWidth * 0.25))
-  const labelFontSize = Math.max(10, Math.min(16, barWidth * 0.2))
+  const amountFontSize = Math.max(12, Math.min(18, barWidth * 0.25));
+  const labelFontSize = Math.max(10, Math.min(16, barWidth * 0.2));
 
   // Enhanced text positioning to prevent overflow
-  const textPadding = 10
-  const labelOffset = 25
+  const textPadding = 10;
+  const labelOffset = 25;
 
   const svgBars = cleanedSkills
     .map((skill, i) => {
-      const height = Math.max(10, (skill.amount / maxAmount) * (chartHeight - 60)) // Reserve space for labels
-      const x = chartPadding + i * (barWidth + barSpacing)
-      const y = chartHeight - height - labelOffset
+      const height = Math.max(
+        10,
+        (skill.amount / maxAmount) * (chartHeight - 60)
+      ); // Reserve space for labels
+      const x = chartPadding + i * (barWidth + barSpacing);
+      const y = chartHeight - height - labelOffset;
 
       // Ensure text doesn't overflow
-      const amountY = Math.max(amountFontSize + 5, y - textPadding)
-      const labelY = chartHeight - 5
+      const amountY = Math.max(amountFontSize + 5, y - textPadding);
+      const labelY = chartHeight - 5;
 
       return `
       <g class="skill-group">
@@ -177,14 +207,14 @@ export function renderSkillData(skills) {
           ${skill.type.replace("skill_", "").toUpperCase()}
         </text>
       </g>
-    `
+    `;
     })
-    .join("")
+    .join("");
 
   // Enhanced SVG with better viewBox and responsive design
-  const svgHeight = chartHeight + 40 // Extra space for labels
-  const viewBoxWidth = chartWidth
-  const viewBoxHeight = svgHeight
+  const svgHeight = chartHeight + 40; // Extra space for labels
+  const viewBoxWidth = chartWidth;
+  const viewBoxHeight = svgHeight;
 
   root.innerHTML = `
     <div class="stats-container">
@@ -239,42 +269,42 @@ export function renderSkillData(skills) {
         </div>
       </div>
     </div>
-  `
+  `;
 
   // Add enhanced interactivity
-  const skillGroups = root.querySelectorAll(".skill-group")
+  const skillGroups = root.querySelectorAll(".skill-group");
   skillGroups.forEach((group, index) => {
-    const rect = group.querySelector(".skill-bar")
-    const amount = group.querySelector(".skill-amount")
-    const label = group.querySelector(".skill-label")
+    const rect = group.querySelector(".skill-bar");
+    const amount = group.querySelector(".skill-amount");
+    const label = group.querySelector(".skill-label");
 
     group.addEventListener("mouseenter", () => {
-      rect.setAttribute("filter", "url(#glow)")
-      amount.setAttribute("fill", "var(--accent-secondary)")
-      label.setAttribute("fill", "var(--accent-secondary)")
-    })
+      rect.setAttribute("filter", "url(#glow)");
+      amount.setAttribute("fill", "var(--accent-secondary)");
+      label.setAttribute("fill", "var(--accent-secondary)");
+    });
 
     group.addEventListener("mouseleave", () => {
-      rect.setAttribute("filter", "url(#barShadow)")
-      amount.setAttribute("fill", "var(--text-primary)")
-      label.setAttribute("fill", "var(--text-primary)")
-    })
-  })
+      rect.setAttribute("filter", "url(#barShadow)");
+      amount.setAttribute("fill", "var(--text-primary)");
+      label.setAttribute("fill", "var(--text-primary)");
+    });
+  });
 
   // Add resize listener for better responsiveness
   const resizeHandler = () => {
     // Debounce resize events
-    clearTimeout(window.skillChartResizeTimeout)
+    clearTimeout(window.skillChartResizeTimeout);
     window.skillChartResizeTimeout = setTimeout(() => {
-      renderSkillData(skills)
-    }, 250)
-  }
+      renderSkillData(skills);
+    }, 250);
+  };
 
-  window.addEventListener("resize", resizeHandler)
+  window.addEventListener("resize", resizeHandler);
 
   // Clean up listener when component unmounts
   return () => {
-    window.removeEventListener("resize", resizeHandler)
-    clearTimeout(window.skillChartResizeTimeout)
-  }
+    window.removeEventListener("resize", resizeHandler);
+    clearTimeout(window.skillChartResizeTimeout);
+  };
 }
