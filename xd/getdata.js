@@ -3,7 +3,7 @@ import { renderAuditData } from "./render.js";
 import { renderSkillData } from "./render.js";
 import { showAuthFormLogin } from "./script.js";
 import { showNotification } from "./utils.js";
-//--------------------- DATA QUERY
+
 export async function Getcredontial() {
   const query_data = `
     {
@@ -72,7 +72,7 @@ export async function Getcredontial() {
   secondSection(email, amount, campus, region);
 }
 
-//---------------------- AUDIT QUERY
+
 export async function Getauditdata() {
   const audit_query = `
     {
@@ -172,7 +172,7 @@ export async function Getskillsdata() {
     return;
   }
   let ok = deduplicateByHighestAmount(res.data.transaction);
-  // console.log(ok)
+
   renderSkillData(ok);
 }
 

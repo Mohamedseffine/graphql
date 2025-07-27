@@ -1,4 +1,3 @@
-// ------------------ NOTTIFICATION 
 
 export function showNotification(message) {
   const el = document.getElementById("custom-notification");
