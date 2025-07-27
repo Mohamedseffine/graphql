@@ -71,36 +71,49 @@ export function renderAuditData(total, success, fail, winrate, loserate) {
   const root = document.getElementById("audit-root");
   if (!root) return;
 
+
+  const totalBarWidth = 300;
+
+
+  const winPercent = parseFloat(winrate);
+  const losePercent = parseFloat(loserate);
+
+  const winWidth = (winPercent / 100) * totalBarWidth;
+  const loseWidth = (losePercent / 100) * totalBarWidth;
+
   root.innerHTML = `
     <div class="stats-container">
       <div class="stats-card">
-        <h2>Audit Statistics</h2>
+        <h2>Done Audit Statistics</h2>
         <div class="win-rate-display">${winrate} Success Rate</div>
         
-        <div class="progress-container">
-          <div class="progress-bar">
-            <div class="win-progress" style="width: ${winrate}"></div>
-            <div class="lose-progress" style="width: ${loserate}"></div>
-          </div>
-          <div class="progress-labels">
+        <div class="progress-container" style="width: ${totalBarWidth}px; margin: 0 auto;">
+          <svg width="${totalBarWidth}" height="30" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <rect x="0" y="5" width="${totalBarWidth}" height="20" fill="#ddd" rx="10" ry="10" />
+            <rect x="0" y="5" width="${winWidth}" height="20" fill="#0bebcdff" rx="10" ry="10" />
+            <rect x="${winWidth}" y="5" width="${loseWidth}" height="20" fill="#661af3ff" rx="10" ry="10" />
+          </svg>
+
+
+          <div class="progress-labels" style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-top: 5px;">
             <span>0%</span>
             <span>50%</span>
             <span>100%</span>
           </div>
         </div>
-
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-value">${total}</div>
-            <div class="stat-label">Total Audits</div>
+        <div class="fail-rate-display">${loserate} Fail Rate</div>
+        <div class="stats-grid" style="display: flex; justify-content: space-around; margin-top: 20px;">
+          <div class="stat-item" style="text-align: center;">
+            <div class="stat-value" style="font-size: 20px; font-weight: bold;">${total}</div>
+            <div class="stat-label" style="font-size: 12px; color: #666;">Total Audits</div>
           </div>
-          <div class="stat-item success">
-            <div class="stat-value">${success}</div>
-            <div class="stat-label">Success</div>
+          <div class="stat-item success" style="text-align: center;">
+            <div class="stat-value" style="font-size: 20px; font-weight: bold; color: #4CAF50;">${success}</div>
+            <div class="stat-label" style="font-size: 12px; color: #666;">Success</div>
           </div>
-          <div class="stat-item fail">
-            <div class="stat-value">${fail}</div>
-            <div class="stat-label">Failed</div>
+          <div class="stat-item fail" style="text-align: center;">
+            <div class="stat-value" style="font-size: 20px; font-weight: bold; color: #f44336;">${fail}</div>
+            <div class="stat-label" style="font-size: 12px; color: #666;">Failed</div>
           </div>
         </div>
       </div>

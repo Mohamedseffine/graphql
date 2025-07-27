@@ -368,6 +368,19 @@ h2::after {
   animation: glow 2s ease-in-out infinite;
 }
 
+.fail-rate-display {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+  margin: 2rem 0;
+  background: linear-gradient(135deg, var(--fail-color), #fd0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+  animation: glow 2s ease-in-out infinite;
+}
+
 .progress-container {
   margin: 2.5rem 0;
 }
