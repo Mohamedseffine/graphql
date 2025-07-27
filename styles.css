@@ -707,3 +707,301 @@ h2::after {
     max-width: 600px;
   }
 }
+
+
+
+/* Tablet (768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .stats-container {
+    padding: 2rem 1rem;
+  }
+
+  .stats-card {
+    padding: 2.5rem;
+    max-width: 750px;
+  }
+
+  .profile-card {
+    padding: 2.5rem;
+    max-width: 550px;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  #logoutBtn {
+    top: 15px;
+    right: 15px;
+    padding: 0.7rem 1.3rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Large (576px to 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .stats-container {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .stats-card {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+
+  .profile-card {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .auth-form {
+    padding: 2.5rem 2rem;
+    max-width: 400px;
+  }
+
+  #logoutBtn {
+    top: 12px;
+    right: 12px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile Small (up to 575px) */
+@media (max-width: 575px) {
+  body {
+    font-size: 14px;
+  }
+
+  .profile-page-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .stats-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .stats-card,
+  .profile-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin: 0.5rem;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .profile-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .profile-row span {
+    text-align: left;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-item {
+    padding: 1.5rem;
+  }
+
+  .auth-form {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    max-width: 340px;
+  }
+
+  .auth-form input[type="text"],
+  .auth-form input[type="password"] {
+    padding: 1rem 1.25rem;
+  }
+
+  .auth-form button[type="submit"] {
+    padding: 1rem;
+  }
+
+  #logoutBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    z-index: 1001;
+  }
+
+  #custom-notification {
+    right: 10px;
+    left: 10px;
+    max-width: calc(100% - 20px);
+    padding: 1rem 1.5rem;
+  }
+
+  .chart-container {
+    padding: 1rem 0;
+  }
+}
+
+/* Extra Small Mobile (up to 375px) */
+@media (max-width: 375px) {
+  .auth-form {
+    max-width: 300px;
+    padding: 1.5rem 1rem;
+  }
+
+  .stats-card,
+  .profile-card {
+    margin: 0.25rem;
+    padding: 1.25rem;
+  }
+
+  .profile-row {
+    padding: 0.75rem;
+  }
+
+  .stat-item {
+    padding: 1.25rem;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .profile-page-container {
+    padding: 0.5rem;
+  }
+
+  .profile-card {
+    padding: 1.5rem;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+
+  .auth-form-container {
+    padding: 1rem;
+  }
+
+  .auth-form {
+    padding: 2rem;
+  }
+
+  #logoutBtn {
+    top: 5px;
+    right: 5px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  .avatar-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .stats-card,
+  .profile-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    background: white;
+  }
+
+  #logoutBtn,
+  #custom-notification {
+    display: none;
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Light Mode Support */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-dark: #f8fafc;
+    --bg-darker: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: rgba(14, 165, 233, 0.15);
+    --input-bg: #ffffff;
+    --input-border: #e2e8f0;
+  }
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection styles */
+::selection {
+  background: rgba(14, 165, 233, 0.3);
+  color: var(--text-primary);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
