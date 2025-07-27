@@ -1,4 +1,4 @@
-import { renderUserInfo, renderUserProfile } from "./render.js";
+import { secondSection, firstSection } from "./render.js";
 import { renderAuditData } from "./render.js";
 import { renderSkillData } from "./render.js";
 import { showAuthFormLogin } from "./script.js";
@@ -85,21 +85,15 @@ export async function Getcredontial() {
 
   console.log(profileimage);
 
-  renderUserProfile(
+  firstSection(
     login,
     fname,
     lname,
     profileimage
   );
 
-  renderUserInfo(email, amount, campus, region)
+  secondSection(email, amount, campus, region)
 }
-// function checkImageAvailability(login, callback) {
-//   const img = new Image();
-//   img.onload = () => callback(true);   // Image loaded (200)
-//   img.onerror = () => callback(false); // Image failed (404 or blocked)
-//   img.src = `https://discord.zone01oujda.ma/assets/pictures/${login}.jpg`;
-// }
 
 //---------------------- AUDIT QUERY
 export async function Getauditdata() {

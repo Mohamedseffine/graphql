@@ -1,6 +1,6 @@
 import { showNotification } from "./utils.js";
 
-export function renderUserProfile(
+export function firstSection(
   login,
   firstName,
   lastName,
@@ -45,8 +45,8 @@ export function renderUserProfile(
   });
 }
 
-export function renderUserInfo(email, xp, campus, region) {
-  const root = document.getElementById("profile-informations");
+export function secondSection(email, xp, campus, region) {
+  const root = document.getElementById("profile-extras");
   if (!root) return;
 
   root.innerHTML = `
