@@ -667,3 +667,43 @@ h2::after {
   font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-weight: 500;
 }
+
+
+
+#custom-notification[style*="display: block"] {
+  transform: translateY(0);
+  opacity: 1;
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Responsive Design */
+
+/* Large Desktop (1200px and up) */
+@media (min-width: 1200px) {
+  .stats-container {
+    padding: 4rem 2rem;
+  }
+
+  .stats-card {
+    padding: 4rem;
+  }
+
+  .profile-card {
+    padding: 4rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop (992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .stats-card {
+    max-width: 1000px;
+  }
+
+  .profile-card {
+    max-width: 600px;
+  }
+}
