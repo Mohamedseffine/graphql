@@ -1,4 +1,4 @@
-import { renderUserProfile } from "./render.js";
+import { renderUserInfo, renderUserProfile } from "./render.js";
 import { renderAuditData } from "./render.js";
 import { renderSkillData } from "./render.js";
 import { showAuthFormLogin } from "./script.js";
@@ -89,12 +89,10 @@ export async function Getcredontial() {
     login,
     fname,
     lname,
-    email,
-    amount,
-    campus,
-    region,
     profileimage
   );
+
+  renderUserInfo(email, amount, campus, region)
 }
 // function checkImageAvailability(login, callback) {
 //   const img = new Image();
