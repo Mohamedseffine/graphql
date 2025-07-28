@@ -548,7 +548,7 @@ h2::after {
 
 .skill-group:hover .skill-amount,
 .skill-group:hover .skill-label {
-  fill: var(--accent-secondary);
+  fill: black;
 }
 
 /* Auth Form Styles */

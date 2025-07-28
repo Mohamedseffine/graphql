@@ -93,7 +93,7 @@ export function renderAuditData(total, success, fail, winrate, loserate) {
         
         <div class="progress-container" style="width: ${totalBarWidth}px; margin: 0 auto;">
           <svg width="${totalBarWidth}" height="30" xmlns="http://www.w3.org/2000/svg" style="display: block;">
-            <rect x="0" y="5" width="${totalBarWidth}" height="20" fill="#ddd" rx="10" ry="10" />
+            <rect x="0" y="5" width="${totalBarWidth}" height="20" fill="#b0e0e6" rx="10" ry="10" />
             <rect x="0" y="5" width="${winWidth}" height="20" fill="#0bebcdff" rx="10" ry="10" />
             <rect x="${winWidth}" y="5" width="${loseWidth}" height="20" fill="#661af3ff" rx="10" ry="10" />
           </svg>
@@ -201,12 +201,11 @@ export function renderSkillData(skills) {
           width="${barWidth}" 
           height="${height}" 
           rx="6" 
-          fill="url(#barGradient)" 
+          fill="var(--accent-primary)" 
           class="skill-bar"
-          filter="url(#barShadow)"
+          
         />
 
-        <!-- Amount Label Above Bar (Fixed positioning) -->
         <text 
           x="${x + barWidth / 2}" 
           y="${amountY}" 
@@ -220,7 +219,7 @@ export function renderSkillData(skills) {
           ${skill.amount}
         </text>
 
-        <!-- Skill Label Below Chart (Fixed positioning) -->
+        
         <text 
           x="${x + barWidth / 2}" 
           y="${labelY}" 
@@ -256,81 +255,11 @@ export function renderSkillData(skills) {
             font-family="Segoe UI, Tahoma, sans-serif"
             class="skill-chart"
             style="max-width: 100%; height: auto;"
-          >
-            <defs>
-              <!-- Enhanced gradient -->
-              <linearGradient id="barGradient" x1="0" x2="0" y1="1" y2="0">
-                <stop offset="0%" stop-color="var(--accent-primary)" />
-                <stop offset="50%" stop-color="var(--accent-secondary)" />
-                <stop offset="100%" stop-color="#e1bee7" />
-              </linearGradient>
-              
-              <!-- Enhanced shadow filter -->
-              <filter id="barShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feOffset dx="2" dy="2" result="offsetBlur" />
-                <feComposite in="SourceGraphic" in2="offsetBlur" operator="over" />
-              </filter>
-              
-              <!-- Glow effect for hover -->
-              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                <feMerge> 
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            
-            <!-- Background grid for better readability -->
-            <defs>
-              <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" opacity="0.3"/>
-            
+          > 
             ${svgBars}
           </svg>
         </div>
       </div>
     </div>
   `;
-
-  // Add enhanced interactivity
-  const skillGroups = root.querySelectorAll(".skill-group");
-  skillGroups.forEach((group, index) => {
-    const rect = group.querySelector(".skill-bar");
-    const amount = group.querySelector(".skill-amount");
-    const label = group.querySelector(".skill-label");
-
-    group.addEventListener("mouseenter", () => {
-      rect.setAttribute("filter", "url(#glow)");
-      amount.setAttribute("fill", "var(--accent-secondary)");
-      label.setAttribute("fill", "var(--accent-secondary)");
-    });
-
-    group.addEventListener("mouseleave", () => {
-      rect.setAttribute("filter", "url(#barShadow)");
-      amount.setAttribute("fill", "var(--text-primary)");
-      label.setAttribute("fill", "var(--text-primary)");
-    });
-  });
-
-  // Add resize listener for better responsiveness
-  const resizeHandler = () => {
-    // Debounce resize events
-    clearTimeout(window.skillChartResizeTimeout);
-    window.skillChartResizeTimeout = setTimeout(() => {
-      renderSkillData(skills);
-    }, 250);
-  };
-
-  window.addEventListener("resize", resizeHandler);
-
-  // Clean up listener when component unmounts
-  return () => {
-    window.removeEventListener("resize", resizeHandler);
-    clearTimeout(window.skillChartResizeTimeout);
-  };
 }
