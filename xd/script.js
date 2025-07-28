@@ -40,6 +40,8 @@ export function showAuthFormLogin() {
 }
 
 async function sendlogindata(username, password) {
+  const root = document.querySelector(".auth-form-container");
+  root.innerHTML = "<h1>Fetching Data</h1>";
   try {
     const res = await fetch("https://zone01-auth-proxy.onrender.com/auth", {
       method: "POST",
@@ -57,11 +59,14 @@ async function sendlogindata(username, password) {
       showNotification("Login successful");
     }
     if (!res.ok) {
-      let name = document.querySelector('[name="username"]');
-      let pass = document.querySelector('[name="password"]');
-      name.value = "";
-      pass.value = "";
+      // let name = document.querySelector('[name="username"]');
+      // let pass = document.querySelector('[name="password"]');
+      // name.value = "";
+      // pass.value = "";
       showNotification("Wrong credentials");
+      const root = document.getElementById("root")
+      root.innerHTML=""
+      showAuthFormLogin()
     }
   } catch (error) {
     console.error("Login error:", error);

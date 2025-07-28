@@ -1,6 +1,13 @@
 import { showNotification } from "./utils.js";
 
-export function firstSection(login, firstName, lastName, profileImage) {
+export function firstSection(
+  login,
+  firstName,
+  lastName,
+  profileImage,
+  tel,
+  cin
+) {
   const root = document.getElementById("profile-root");
   if (!root) return;
 
@@ -13,6 +20,9 @@ export function firstSection(login, firstName, lastName, profileImage) {
     </button>
 
     <article class="profile-card fade-in">
+    <h1>
+      Welcome&nbsp;<span class="accent-text">${firstName}</span>
+    </h1>
       <div class="profile-avatar pulse">
         <img
           src="${profileImage}"
@@ -22,13 +32,13 @@ export function firstSection(login, firstName, lastName, profileImage) {
         >
       </div>
 
-      <h1>
-        Welcome&nbsp;<span class="accent-text">${firstName}</span>
-      </h1>
+      <h1>Personal Informations:</h1>
       <div class="profile-grid">
-        <div class="profile-row"><strong>Login:</strong><span>${login}</span></div>
+        <div class="profile-row"><strong>Username:</strong><span>${login}</span></div>
         <div class="profile-row"><strong>First Name:</strong><span>${firstName}</span></div>
         <div class="profile-row"><strong>Last Name:</strong><span>${lastName}</span></div>
+        <div class="profile-row"><strong>Phone Number:</strong><span>${tel}</span></div>
+        <div class="profile-row"><strong>C.I.N:</strong><span>${cin}</span></div>
       </div>
     </article>
   </section>
@@ -40,7 +50,7 @@ export function firstSection(login, firstName, lastName, profileImage) {
   });
 }
 
-export function secondSection(email, xp, campus, region) {
+export function secondSection(email, xp, campus, region, country) {
   const root = document.getElementById("profile-extras");
   if (!root) return;
 
@@ -49,12 +59,13 @@ export function secondSection(email, xp, campus, region) {
   <section class="profile-page-container" style="position: relative;">
   <article class="profile-card fade-in">
    <h1>
-        Personal Info :
+        Additional Informations :
       </h1>
       <div class="profile-grid">
         <div class="profile-row"><strong>Email:</strong><span>${email}</span></div>
         <div class="profile-row"><strong>Campus:</strong><span>${campus}</span></div>
         <div class="profile-row"><strong>XP:</strong><span class="xp-value">${xp}</span></div>
+        <div class="profile-row"><strong>Country:</strong><span>${country}</span></div>
         <div class="profile-row"><strong>Region:</strong><span>${region}</span></div>
       </div>
     </article>

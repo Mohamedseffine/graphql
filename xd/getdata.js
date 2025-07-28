@@ -2,7 +2,6 @@ import { secondSection, firstSection } from "./render.js";
 import { renderAuditData } from "./render.js";
 import { renderSkillData } from "./render.js";
 import { showAuthFormLogin } from "./script.js";
-import { showNotification } from "./utils.js";
 
 export async function Getcredontial() {
   const query_data = `
@@ -64,12 +63,15 @@ export async function Getcredontial() {
   let amount = (rawamount / 1000).toFixed(0) + "kB";
   const campus = res.data.user[0].campus || "doesn't exist";
   const region = res.data.user[0].attrs.addressRegion || "doesn't exist";
+  const country = res.data.user[0].attrs.country || "doesn't exist";
+  const PhoneNumber = res.data.user[0].attrs.tel || "doesn't exist";
+  const cin = res.data.user[0].attrs.cin || "doesn't exist";
   const profileimage =
     "https://discord.zone01oujda.ma//assets/pictures/" + login + ".jpg";
 
-  firstSection(login, fname, lname, profileimage);
+  firstSection(login, fname, lname, profileimage, PhoneNumber, cin);
 
-  secondSection(email, amount, campus, region);
+  secondSection(email, amount, campus, region,country );
 }
 
 
