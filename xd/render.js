@@ -138,22 +138,17 @@ export function renderSkillData(skills) {
       </div>`;
     return;
   }
-  // Deduplicate by keeping the highest amount for each type
-  const map = new Map();
-  for (const skill of skills) {
-    if (!map.has(skill.type) || map.get(skill.type).amount < skill.amount) {
-      map.set(skill.type, skill);
-    }
-  }
+  
 
-  const cleanedSkills = Array.from(map.values());
+  const cleanedSkills = skills;
+  
   const maxAmount = Math.max(...cleanedSkills.map((s) => s.amount));
 
-  // Enhanced responsive sizing calculations
+  
   const isMobile = window.innerWidth < 768;
   const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
-  // Dynamic bar sizing based on screen size and number of skills
+  
   const baseBarWidth = isMobile ? 40 : isTablet ? 60 : 80;
   const barWidth = Math.max(
     baseBarWidth,
@@ -161,21 +156,21 @@ export function renderSkillData(skills) {
   );
   const barSpacing = isMobile ? 15 : isTablet ? 25 : 35;
 
-  // Chart dimensions with better mobile optimization
+  
   const baseChartHeight = isMobile ? 300 : isTablet ? 400 : 500;
   const chartHeight = Math.min(baseChartHeight, window.innerHeight * 0.4);
 
-  // Calculate total width with padding
+  
   const totalBarsWidth =
     cleanedSkills.length * (barWidth + barSpacing) - barSpacing;
   const chartPadding = 40;
   const chartWidth = Math.max(totalBarsWidth + chartPadding * 2, 300);
 
-  // Dynamic font sizes based on bar width and screen size
+ 
   const amountFontSize = Math.max(12, Math.min(18, barWidth * 0.25));
   const labelFontSize = Math.max(10, Math.min(16, barWidth * 0.2));
 
-  // Enhanced text positioning to prevent overflow
+  
   const textPadding = 10;
   const labelOffset = 25;
 
@@ -184,11 +179,11 @@ export function renderSkillData(skills) {
       const height = Math.max(
         10,
         (skill.amount / maxAmount) * (chartHeight - 60)
-      ); // Reserve space for labels
+      );
       const x = chartPadding + i * (barWidth + barSpacing);
       const y = chartHeight - height - labelOffset;
 
-      // Ensure text doesn't overflow
+     
       const amountY = Math.max(amountFontSize + 5, y - textPadding);
       const labelY = chartHeight - 5;
 
@@ -236,8 +231,8 @@ export function renderSkillData(skills) {
     })
     .join("");
 
-  // Enhanced SVG with better viewBox and responsive design
-  const svgHeight = chartHeight + 40; // Extra space for labels
+  
+  const svgHeight = chartHeight + 40; 
   const viewBoxWidth = chartWidth;
   const viewBoxHeight = svgHeight;
 

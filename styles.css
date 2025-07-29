@@ -18,7 +18,7 @@
 }
 
 
-/* Animations */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -93,7 +93,7 @@
   }
 }
 
-/* Base Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -126,9 +126,6 @@ body::before {
 
 
 
-
-
-/* Shared Components */
 .stats-container {
   display: flex;
   justify-content: center;
@@ -193,7 +190,7 @@ h2::after {
   animation: glow 2s ease-in-out infinite;
 }
 
-/* Profile Page */
+
 .profile-page-container {
   min-height: 100vh;
   display: flex;
@@ -326,7 +323,7 @@ h2::after {
 }
 
 
-/* Logout Button */
+
 #logoutBtn {
   position: absolute;
   top: 20px;
@@ -354,7 +351,7 @@ h2::after {
   transform: translateY(-1px);
 }
 
-/* Audit Stats */
+
 .win-rate-display {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
@@ -503,7 +500,7 @@ h2::after {
   letter-spacing: 0.05em;
 }
 
-/* Skill Chart */
+
 .chart-container {
   width: 100%;
   overflow-x: auto;
@@ -546,12 +543,15 @@ h2::after {
   letter-spacing: 0.05em;
 }
 
-.skill-group:hover .skill-amount,
-.skill-group:hover .skill-label {
+.skill-group:hover .skill-amount {
   fill: black;
 }
 
-/* Auth Form Styles */
+.skill-group:hover .skill-label {
+  fill: var(--text-secondary);
+}
+
+
 .auth-form-container {
   display: flex;
   flex-direction: column;
@@ -657,7 +657,7 @@ h2::after {
   transform: translateY(-1px);
 }
 
-/* Notification Styles */
+
 #custom-notification {
   position: fixed;
   top: 20px;
@@ -689,9 +689,7 @@ h2::after {
   animation: glow 2s ease-in-out infinite;
 }
 
-/* Responsive Design */
 
-/* Large Desktop (1200px and up) */
 @media (min-width: 1200px) {
   .stats-container {
     padding: 4rem 2rem;
@@ -710,7 +708,7 @@ h2::after {
   }
 }
 
-/* Desktop (992px to 1199px) */
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .stats-card {
     max-width: 1000px;
@@ -723,7 +721,7 @@ h2::after {
 
 
 
-/* Tablet (768px to 991px) */
+
 @media (min-width: 768px) and (max-width: 991px) {
   .stats-container {
     padding: 2rem 1rem;
@@ -756,7 +754,7 @@ h2::after {
   }
 }
 
-/* Mobile Large (576px to 767px) */
+
 @media (min-width: 576px) and (max-width: 767px) {
   .stats-container {
     padding: 1.5rem 0.75rem;
@@ -795,7 +793,7 @@ h2::after {
   }
 }
 
-/* Mobile Small (up to 575px) */
+
 @media (max-width: 575px) {
   body {
     font-size: 14px;
@@ -877,7 +875,7 @@ h2::after {
   }
 }
 
-/* Extra Small Mobile (up to 375px) */
+
 @media (max-width: 375px) {
   .auth-form {
     max-width: 300px;
@@ -899,7 +897,7 @@ h2::after {
   }
 }
 
-/* Landscape Mobile */
+
 @media (max-height: 500px) and (orientation: landscape) {
   .profile-page-container {
     padding: 0.5rem;
@@ -931,7 +929,7 @@ h2::after {
   }
 }
 
-/* High DPI Displays */
+
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
   .avatar-img {
@@ -940,7 +938,7 @@ h2::after {
   }
 }
 
-/* Print Styles */
+
 @media print {
   body {
     background: white;
@@ -960,7 +958,7 @@ h2::after {
   }
 }
 
-/* Accessibility - Reduced Motion */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -969,7 +967,7 @@ h2::after {
   }
 }
 
-/* Light Mode Support */
+
 @media (prefers-color-scheme: light) {
   :root {
     --bg-dark: #f8fafc;
@@ -983,24 +981,24 @@ h2::after {
   }
 }
 
-/* Focus styles for accessibility */
+
 *:focus-visible {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
-/* Smooth scrolling */
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection styles */
+
 ::selection {
   background: rgba(14, 165, 233, 0.3);
   color: var(--text-primary);
 }
 
-/* Scrollbar styles */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
